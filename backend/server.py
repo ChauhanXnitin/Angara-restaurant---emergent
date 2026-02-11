@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -6,9 +6,10 @@ import os
 import logging
 from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict
-from typing import List
+from typing import List, Optional
 import uuid
 from datetime import datetime, timezone
+import httpx
 
 
 ROOT_DIR = Path(__file__).parent
@@ -36,6 +37,15 @@ class StatusCheck(BaseModel):
 
 class StatusCheckCreate(BaseModel):
     client_name: str
+
+class ReservationCreate(BaseModel):
+    name: str
+    email: Optional[str] = ""
+    phone: str
+    date: str
+    time: str
+    guests: str
+    message: Optional[str] = ""
 
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
@@ -65,6 +75,75 @@ async def get_status_checks():
             check['timestamp'] = datetime.fromisoformat(check['timestamp'])
     
     return status_checks
+
+@api_router.post("/reservations")
+async def create_reservation(reservation: ReservationCreate):
+    """
+    Create a new table reservation and send to Google Sheets via webhook
+    """
+    try:
+        # Get the Google Sheets webhook URL from environment
+        webhook_url = os.environ.get('GOOGLE_SHEETS_WEBHOOK_URL')
+        
+        if not webhook_url:
+            logger.warning("Google Sheets webhook URL not configured")
+            raise HTTPException(
+                status_code=500, 
+                detail="Reservation system not configured. Please contact restaurant directly."
+            )
+        
+        # Prepare data for Google Sheets
+        reservation_data = {
+            "name": reservation.name,
+            "email": reservation.email,
+            "phone": reservation.phone,
+            "date": reservation.date,
+            "time": reservation.time,
+            "guests": reservation.guests,
+            "message": reservation.message
+        }
+        
+        # Send to Google Sheets webhook
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            response = await client.post(
+                webhook_url,
+                json=reservation_data,
+                headers={"Content-Type": "application/json"}
+            )
+            
+            if response.status_code != 200:
+                logger.error(f"Google Sheets webhook failed: {response.text}")
+                raise HTTPException(
+                    status_code=500,
+                    detail="Failed to save reservation. Please try again."
+                )
+        
+        logger.info(f"Reservation created successfully for {reservation.name}")
+        
+        return {
+            "success": True,
+            "message": "Reservation request received! We'll call you shortly to confirm.",
+            "data": reservation_data
+        }
+        
+    except httpx.TimeoutException:
+        logger.error("Google Sheets webhook timeout")
+        raise HTTPException(
+            status_code=504,
+            detail="Reservation system is taking too long. Please try again."
+        )
+    except httpx.RequestError as e:
+        logger.error(f"Google Sheets webhook request error: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail="Failed to process reservation. Please contact us directly."
+        )
+    except Exception as e:
+        logger.error(f"Unexpected error in reservation: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail="An unexpected error occurred. Please try again."
+        )
 
 # Include the router in the main app
 app.include_router(api_router)
