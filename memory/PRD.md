@@ -46,130 +46,192 @@ Create a modern, warm, and professional restaurant website for a pure vegetarian
 
 ### Date: December 10, 2025
 
-#### Frontend (MVP with Mock Data)
-1. **Navigation Bar**
-   - Fixed header with smooth scrolling
-   - Desktop & mobile responsive menu
-   - Call Now CTA button
-   
-2. **Hero Section**
-   - Restaurant name in English & Hindi
-   - 4.7 rating display
-   - Tagline: "Pure Vegetarian Excellence"
-   - Info cards (Hours, Price, Location)
-   - Primary CTAs (Reserve Table, View Menu)
-   - High-quality restaurant interior image
-   - Floating special attributes card
+#### Phase 1: Frontend MVP (Completed)
+1. **Navigation Bar** - Fixed header with smooth scrolling, responsive menu
+2. **Hero Section** - Bilingual branding, rating display, CTAs, professional imagery
+3. **About Section** - Restaurant story, "Why Customers Love Us", values
+4. **Menu Section** - Featured dishes, complete menu with 17 items, category filtering
+5. **Reviews Section** - 6 customer testimonials with 4.7★ rating
+6. **Gallery Section** - 8 professional images with category filtering
+7. **Contact Section** - Contact info, Google Maps, reservation form
+8. **Footer** - Branding, navigation, contact details
 
-3. **About Section**
-   - Restaurant story and philosophy
-   - "Why Customers Love Us" (4 key points with icons)
-   - Values section (Inclusive, Sustainable, Community)
-   
-4. **Menu Section**
-   - Featured dishes showcase (4 items)
-   - Complete menu with categories:
-     - Starters (4 items)
-     - Main Course (4 items)
-     - Breads (4 items)
-     - Rice & Biryani (2 items)
-     - Beverages (3 items)
-   - Category filtering
-   - Professional food photography
-   - Pricing display with Indian Rupee symbol
+#### Phase 2: Backend & Integrations (Completed)
+1. **Backend API (FastAPI)**
+   - POST /api/reservations endpoint
+   - Google Sheets webhook integration via httpx
+   - Comprehensive error handling
+   - Request validation with Pydantic models
+   - Logging for monitoring
 
-5. **Reviews Section**
-   - 4.7 star rating display
-   - 6 customer testimonials with ratings
-   - Review cards with hover effects
+2. **Google Sheets Integration**
+   - Apps Script webhook approach (no OAuth needed)
+   - Automatic data storage in Google Sheets
+   - Setup instructions provided in GOOGLE_SHEETS_SETUP.md
+   - Timestamp tracking in IST timezone
 
-6. **Gallery Section**
-   - 8 professional images (food, ambiance, dining)
-   - Category filtering (All, Food, Ambiance, Dining)
-   - Hover effects with captions
+3. **WhatsApp Widget**
+   - Floating widget (bottom right, always visible)
+   - Click-to-chat functionality
+   - Pre-configured with number: 8708206506
+   - Pre-filled message: "Hello! I would like to make a reservation at Angara Restaurant."
+   - Popup with greeting and call-to-action
 
-7. **Contact Section**
-   - Contact information (Address, Phone, Hours, Instagram)
-   - Google Maps integration
-   - Table Reservation Form:
-     - Name, Email, Phone (required)
-     - Date, Time, Number of Guests (required)
-     - Special Requests (optional)
-     - Mock form submission with toast notification
+4. **Frontend-Backend Integration**
+   - Reservation form connected to backend API
+   - Loading states during submission
+   - Success/error toast notifications (sonner)
+   - Form validation and reset on success
+   - Axios for API calls
 
-8. **Footer**
-   - Restaurant branding
-   - Quick navigation links
-   - Contact information
-   - Social media link
-
-#### Design Implementation
-- Lime-yellow (#ECEC75) primary background
-- Black buttons with hover effects
-- Crimson Text serif for headings
-- Consistent spacing and layout
-- Responsive design for all screen sizes
-- Smooth transitions and hover effects
-- Professional food photography from Unsplash/Pexels
+5. **Testing**
+   - Backend API tested (100% success)
+   - Frontend functionality tested (95% success)
+   - Error handling verified
+   - Minor issues documented (low priority)
 
 ## Prioritized Backlog
 
-### P0 - Backend Development (Next Phase)
-1. **Database Models**
-   - Menu items collection
-   - Reservations collection
-   - Reviews collection (optional)
+### P0 - User Setup Required (Before Go-Live)
+1. **Google Sheets Setup** (5 minutes)
+   - Create Google Sheet with provided template
+   - Deploy Apps Script webhook
+   - Add webhook URL to backend .env
+   - Test with sample reservation
 
-2. **API Endpoints**
-   - GET /api/menu - Fetch menu items
-   - POST /api/reservations - Create table reservation
-   - GET /api/restaurant-info - Fetch restaurant details
+2. **Content Updates** (Optional)
+   - Replace stock images with actual restaurant photos
+   - Update menu items and prices
+   - Add more customer reviews
 
-3. **Frontend-Backend Integration**
-   - Replace mock data with API calls
-   - Form submission to backend
-   - Error handling and loading states
+### P1 - Enhanced Features (Future)
+1. **Email Notifications**
+   - Send confirmation email to customer
+   - Send notification to restaurant admin
+   - Email template design
 
-### P1 - Enhanced Features
-1. **Admin Panel** (Optional)
-   - Menu management
-   - Reservation management
-   - View customer inquiries
+2. **Admin Dashboard** (Optional)
+   - View all reservations
+   - Mark reservations as confirmed/completed
+   - Export reservation data
+   - Analytics dashboard
 
-2. **Email Notifications**
-   - Reservation confirmation emails
-   - Admin notification for new bookings
+3. **Advanced WhatsApp Integration**
+   - WhatsApp Business API integration
+   - Automated confirmation messages
+   - Reservation reminders
 
-3. **WhatsApp Integration**
-   - Direct WhatsApp booking link
-   - Quick order via WhatsApp
-
-### P2 - Additional Features
+### P2 - Additional Features (Future)
 1. **Online Ordering System**
    - Cart functionality
-   - Order placement
-   - Payment integration
+   - Order placement and tracking
+   - Payment gateway integration
 
 2. **Customer Accounts**
    - User registration/login
    - Booking history
-   - Favorites menu items
+   - Favorite menu items
+   - Loyalty program
 
 3. **Multi-language Support**
    - Hindi language toggle
    - Content translation
+   - RTL support
 
 ## Next Tasks List
-1. **User Confirmation**: Get client approval on design and content
-2. **Content Updates**: Replace placeholder images with actual restaurant photos (if provided)
-3. **Backend Development**: Build FastAPI endpoints and MongoDB integration
-4. **Form Integration**: Connect reservation form to backend
-5. **Testing**: End-to-end testing of all features
-6. **Deployment**: Prepare for production deployment
+1. **User Action Required**: Follow GOOGLE_SHEETS_SETUP.md to create webhook and add URL to .env
+2. **Test Reservation Flow**: Submit test reservation after webhook setup
+3. **Test WhatsApp Widget**: Verify WhatsApp opens with correct number
+4. **Content Updates**: Replace stock images with actual restaurant photos (optional)
+5. **Menu Updates**: Update menu items and prices with actual data (optional)
+6. **Go Live**: Deploy to production once testing is complete
+
+## API Contracts
+
+### POST /api/reservations
+**Request Body:**
+```json
+{
+  "name": "string (required)",
+  "email": "string (optional)",
+  "phone": "string (required)",
+  "date": "string (required, format: YYYY-MM-DD)",
+  "time": "string (required, format: HH:MM)",
+  "guests": "string (required)",
+  "message": "string (optional)"
+}
+```
+
+**Success Response (200):**
+```json
+{
+  "success": true,
+  "message": "Reservation request received! We'll call you shortly to confirm.",
+  "data": { /* reservation data */ }
+}
+```
+
+**Error Responses:**
+- 500: Webhook URL not configured or request failed
+- 504: Request timeout
+- 422: Invalid data format
+
+### Google Sheets Webhook (External)
+**Endpoint:** User-provided Apps Script URL
+
+**Request:**
+```json
+{
+  "name": "string",
+  "email": "string",
+  "phone": "string",
+  "date": "string",
+  "time": "string",
+  "guests": "string",
+  "message": "string"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Reservation saved successfully"
+}
+```
+
+## Technical Notes
+
+### Environment Variables
+- `GOOGLE_SHEETS_WEBHOOK_URL`: Apps Script webhook URL (user must configure)
+- `REACT_APP_BACKEND_URL`: Frontend backend URL (pre-configured)
+- `MONGO_URL`: MongoDB connection (not used for reservations)
+
+### Dependencies Added
+- **Backend**: httpx (for webhook HTTP requests)
+- **Frontend**: sonner (for toast notifications), axios (for API calls)
+
+### File Structure
+```
+/app/
+├── backend/
+│   ├── server.py (reservation endpoint)
+│   └── .env (webhook URL goes here)
+├── frontend/src/
+│   ├── components/
+│   │   ├── Contact.jsx (reservation form)
+│   │   └── WhatsAppWidget.jsx (floating widget)
+│   └── data/mockData.js (restaurant data)
+├── GOOGLE_SHEETS_SETUP.md (webhook setup guide)
+├── SETUP_INSTRUCTIONS.md (complete setup guide)
+└── memory/PRD.md (this file)
+```
 
 ## Notes
-- All images are professional stock photos that can be replaced with actual restaurant photos
-- Reservation form currently shows mock toast notification
-- Menu prices are sample data and should be updated with actual pricing
-- Instagram link is active and clickable
-- Google Maps integration is functional
+- Backend uses Google Apps Script webhook (simpler than OAuth)
+- WhatsApp widget pre-configured with number 8708206506
+- All reservations saved to Google Sheets with IST timestamp
+- Stock images can be replaced with actual restaurant photos
+- Testing completed - system ready for production after webhook setup
+- No critical issues found in testing
+- Minor UI improvements suggested but not required
