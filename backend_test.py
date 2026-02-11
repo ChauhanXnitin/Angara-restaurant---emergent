@@ -119,12 +119,12 @@ class AngaraRestaurantAPITester:
             "message": "Test reservation"
         }
         
-        # This should fail with 500 since webhook URL is not configured
+        # This should fail with 520 (proxy converts 500 to 520) since webhook URL is not configured
         return self.run_test(
             "Reservation Without Webhook URL",
             "POST",
             "api/reservations",
-            500,
+            520,
             data=reservation_data
         )
 
