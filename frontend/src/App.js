@@ -8,7 +8,8 @@ import Reviews from "./components/Reviews";
 import Gallery from "./components/Gallery";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import { Toaster } from "./components/ui/sonner";
+import WhatsAppWidget from "./components/WhatsAppWidget";
+import { Toaster } from "sonner";
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
       <Gallery />
       <Contact />
       <Footer />
-      <Toaster />
+      <WhatsAppWidget />
+      <Toaster position="top-right" />
     </div>
   );
 }
