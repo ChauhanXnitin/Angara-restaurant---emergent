@@ -270,9 +270,11 @@ CORS_ORIGINS=https://your-vercel-frontend.vercel.app
 
 ## Notes
 - Backend uses Google Apps Script webhook (simpler than OAuth)
-- WhatsApp widget pre-configured with number 8708206506
+- **Google Sheets Webhook**: ✅ Integrated and tested - https://script.google.com/macros/s/AKfycbyNxYGF3eN0P5U9zv6XMElupZMNL9QQjKk0CRm0zs2bP8yEsJephEpGyf8IUJfiU_Cx6w/exec
+- **WhatsApp Widget**: ✅ Integrated with number 8708206506
 - All reservations saved to Google Sheets with IST timestamp
+- **Test Submission**: ✅ Successfully tested - form data saves to sheet
 - Stock images can be replaced with actual restaurant photos
-- Testing completed - system ready for production after webhook setup
+- System fully functional and ready for deployment
+- Deployment guide created for Vercel (frontend) and Railway (backend)
 - No critical issues found in testing
-- Minor UI improvements suggested but not required
