@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-02-11T11:05:53.049867",
+  "timestamp": "2026-02-11T11:06:40.103331",
   "summary": {
     "tests_run": 5,
     "tests_passed": 4,
@@ -25,7 +25,13 @@
       "expected_status": 200,
       "actual_status": 200,
       "success": true,
-      "response_data": [],
+      "response_data": [
+        {
+          "id": "866737ae-f31e-4874-885b-d36d1d473fd0",
+          "client_name": "test_client_110552",
+          "timestamp": "2026-02-11T11:05:52.949235Z"
+        }
+      ],
       "error": null
     },
     {
@@ -36,9 +42,9 @@
       "actual_status": 200,
       "success": true,
       "response_data": {
-        "id": "866737ae-f31e-4874-885b-d36d1d473fd0",
-        "client_name": "test_client_110552",
-        "timestamp": "2026-02-11T11:05:52.949235Z"
+        "id": "441cb19d-3f9b-4cae-b738-a1a920c598ff",
+        "client_name": "test_client_110639",
+        "timestamp": "2026-02-11T11:06:40.023120Z"
       },
       "error": null
     },
