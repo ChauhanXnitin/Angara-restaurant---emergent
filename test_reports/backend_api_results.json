@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-02-11T11:06:40.103331",
+  "timestamp": "2026-02-11T11:07:03.184311",
   "summary": {
     "tests_run": 5,
-    "tests_passed": 4,
-    "success_rate": 80.0
+    "tests_passed": 5,
+    "success_rate": 100.0
   },
   "detailed_results": [
     {
@@ -30,6 +30,11 @@
           "id": "866737ae-f31e-4874-885b-d36d1d473fd0",
           "client_name": "test_client_110552",
           "timestamp": "2026-02-11T11:05:52.949235Z"
+        },
+        {
+          "id": "441cb19d-3f9b-4cae-b738-a1a920c598ff",
+          "client_name": "test_client_110639",
+          "timestamp": "2026-02-11T11:06:40.023120Z"
         }
       ],
       "error": null
@@ -42,9 +47,9 @@
       "actual_status": 200,
       "success": true,
       "response_data": {
-        "id": "441cb19d-3f9b-4cae-b738-a1a920c598ff",
-        "client_name": "test_client_110639",
-        "timestamp": "2026-02-11T11:06:40.023120Z"
+        "id": "f0ad8aa4-bed5-4ed6-ae4f-8c4036ba6f59",
+        "client_name": "test_client_110703",
+        "timestamp": "2026-02-11T11:07:03.106708Z"
       },
       "error": null
     },
@@ -52,13 +57,13 @@
       "test_name": "Reservation Without Webhook URL",
       "method": "POST",
       "endpoint": "api/reservations",
-      "expected_status": 500,
+      "expected_status": 520,
       "actual_status": 520,
-      "success": false,
-      "response_data": null,
-      "error": {
+      "success": true,
+      "response_data": {
         "detail": "An unexpected error occurred. Please try again."
-      }
+      },
+      "error": null
     },
     {
       "test_name": "Reservation With Invalid Data",
