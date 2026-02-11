@@ -1,0 +1,110 @@
+{
+  "timestamp": "2026-02-11T11:05:53.049867",
+  "summary": {
+    "tests_run": 5,
+    "tests_passed": 4,
+    "success_rate": 80.0
+  },
+  "detailed_results": [
+    {
+      "test_name": "Root API Endpoint",
+      "method": "GET",
+      "endpoint": "api/",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": {
+        "message": "Hello World"
+      },
+      "error": null
+    },
+    {
+      "test_name": "Get Status Checks",
+      "method": "GET",
+      "endpoint": "api/status",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": [],
+      "error": null
+    },
+    {
+      "test_name": "Create Status Check",
+      "method": "POST",
+      "endpoint": "api/status",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": {
+        "id": "866737ae-f31e-4874-885b-d36d1d473fd0",
+        "client_name": "test_client_110552",
+        "timestamp": "2026-02-11T11:05:52.949235Z"
+      },
+      "error": null
+    },
+    {
+      "test_name": "Reservation Without Webhook URL",
+      "method": "POST",
+      "endpoint": "api/reservations",
+      "expected_status": 500,
+      "actual_status": 520,
+      "success": false,
+      "response_data": null,
+      "error": {
+        "detail": "An unexpected error occurred. Please try again."
+      }
+    },
+    {
+      "test_name": "Reservation With Invalid Data",
+      "method": "POST",
+      "endpoint": "api/reservations",
+      "expected_status": 422,
+      "actual_status": 422,
+      "success": true,
+      "response_data": {
+        "detail": [
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "date"
+            ],
+            "msg": "Field required",
+            "input": {
+              "name": "",
+              "phone": ""
+            },
+            "url": "https://errors.pydantic.dev/2.12/v/missing"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "time"
+            ],
+            "msg": "Field required",
+            "input": {
+              "name": "",
+              "phone": ""
+            },
+            "url": "https://errors.pydantic.dev/2.12/v/missing"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "guests"
+            ],
+            "msg": "Field required",
+            "input": {
+              "name": "",
+              "phone": ""
+            },
+            "url": "https://errors.pydantic.dev/2.12/v/missing"
+          }
+        ]
+      },
+      "error": null
+    }
+  ]
+}
