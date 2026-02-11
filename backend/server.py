@@ -90,7 +90,7 @@ async def create_reservation(reservation: ReservationCreate):
     """
     try:
         # Get the Google Sheets webhook URL from environment
-        webhook_url = os.environ.get('GOOGLE_SHEETS_WEBHOOK_URL')
+        webhook_url = os.environ.get('https://script.google.com/macros/s/AKfycbyNxYGF3eN0P5U9zv6XMElupZMNL9QQjKk0CRm0zs2bP8yEsJephEpGyf8IUJfiU_Cx6w/exec')
         
         if not webhook_url:
             logger.warning("Google Sheets webhook URL not configured")
