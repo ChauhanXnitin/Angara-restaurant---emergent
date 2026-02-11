@@ -111,7 +111,7 @@ async def create_reservation(reservation: ReservationCreate):
         }
         
         # Send to Google Sheets webhook
-        async with httpx.AsyncClient(timeout=10.0) as client:
+        async with httpx.AsyncClient(timeout=10.0, follow_redirects=True) as client:
             response = await client.post(
                 webhook_url,
                 json=reservation_data,
