@@ -200,7 +200,48 @@ Create a modern, warm, and professional restaurant website for a pure vegetarian
 }
 ```
 
-## Technical Notes
+## Deployment Information
+
+### Production URLs
+- **Frontend**: Deploy to Vercel → `https://your-app.vercel.app`
+- **Backend**: Deploy to Railway → `https://your-app.railway.app`
+
+### Deployment Folders
+- **Frontend**: `/app/frontend` → Vercel
+- **Backend**: `/app/backend` → Railway
+
+### Key Files Created
+- `/app/DEPLOYMENT_GUIDE.md` - Complete deployment instructions
+- `/app/backend/Procfile` - Railway deployment config
+- `/app/backend/railway.json` - Railway settings
+- `/app/.gitignore` - Git ignore file
+
+### Environment Variables
+
+**Vercel (Frontend):**
+```
+REACT_APP_BACKEND_URL=https://your-railway-backend.railway.app
+```
+
+**Railway (Backend):**
+```
+GOOGLE_SHEETS_WEBHOOK_URL=https://script.google.com/macros/s/AKfycbyNxYGF3eN0P5U9zv6XMElupZMNL9QQjKk0CRm0zs2bP8yEsJephEpGyf8IUJfiU_Cx6w/exec
+MONGO_URL=mongodb://localhost:27017 (optional - not needed for reservations)
+DB_NAME=angara_restaurant
+CORS_ORIGINS=https://your-vercel-frontend.vercel.app
+```
+
+### Deployment Steps
+1. Deploy backend to Railway first
+2. Copy Railway backend URL
+3. Deploy frontend to Vercel with backend URL
+4. Update Railway CORS_ORIGINS with Vercel URL
+5. Test the live website
+
+### Cost
+- Vercel: Free tier
+- Railway: ~$5/month (free $5 credit initially)
+- Total: $0-5/month
 
 ### Environment Variables
 - `GOOGLE_SHEETS_WEBHOOK_URL`: Apps Script webhook URL (user must configure)
