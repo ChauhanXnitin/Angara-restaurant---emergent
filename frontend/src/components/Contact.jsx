@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { MapPin, Phone, Clock, Mail, Instagram } from 'lucide-react';
+import { MapPin, Phone, Clock, Instagram } from 'lucide-react';
 import { restaurantInfo } from '../data/mockData';
-import { useToast } from '../hooks/use-toast';
+import { toast } from 'sonner';
+import axios from 'axios';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const Contact = () => {
-  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,6 +16,7 @@ const Contact = () => {
     guests: '2',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -22,27 +25,41 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     
-    // Mock submission
-    console.log('Reservation request:', formData);
-    
-    toast({
-      title: "Reservation Request Received!",
-      description: "We'll call you shortly to confirm your booking.",
-    });
+    try {
+      const response = await axios.post(`${BACKEND_URL}/api/reservations`, formData);
+      
+      if (response.data.success) {
+        toast.success("Reservation Request Received!", {
+          description: "We'll call you shortly to confirm your booking.",
+        });
 
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      date: '',
-      time: '',
-      guests: '2',
-      message: ''
-    });
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          date: '',
+          time: '',
+          guests: '2',
+          message: ''
+        });
+      }
+    } catch (error) {
+      console.error('Reservation error:', error);
+      
+      const errorMessage = error.response?.data?.detail || 
+                          "Failed to submit reservation. Please call us directly.";
+      
+      toast.error("Reservation Failed", {
+        description: errorMessage,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -256,8 +273,8 @@ const Contact = () => {
                 ></textarea>
               </div>
 
-              <button type="submit" className="btn-primary w-full text-lg py-4">
-                Request Reservation
+              <button type="submit" disabled={isSubmitting} className="btn-primary w-full text-lg py-4">
+                {isSubmitting ? 'Submitting...' : 'Request Reservation'}
               </button>
 
               <p className="text-sm text-gray-700 text-center">
