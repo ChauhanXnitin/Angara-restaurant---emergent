@@ -28,11 +28,18 @@ function doPost(e) {
     // Parse the incoming data
     var data = JSON.parse(e.postData.contents);
     
+    // Format phone number to prevent formula error
+    // Add single quote prefix to treat as text in Google Sheets
+    var phoneNumber = data.phone || '';
+    if (phoneNumber) {
+      phoneNumber = "'" + phoneNumber;
+    }
+    
     // Create a new row with the data
     var newRow = [
       data.name || '',
       data.email || '',
-      data.phone || '',
+      phoneNumber,
       data.date || '',
       data.time || '',
       data.guests || '',
