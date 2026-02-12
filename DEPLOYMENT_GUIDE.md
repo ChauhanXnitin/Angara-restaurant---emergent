@@ -111,10 +111,10 @@ Your website has two parts:
    
    ```env
    GOOGLE_SHEETS_WEBHOOK_URL=https://script.google.com/macros/s/AKfycbyNxYGF3eN0P5U9zv6XMElupZMNL9QQjKk0CRm0zs2bP8yEsJephEpGyf8IUJfiU_Cx6w/exec
-   MONGO_URL=mongodb://localhost:27017
-   DB_NAME=angara_restaurant
    CORS_ORIGINS=https://your-vercel-frontend-url.vercel.app
    ```
+   
+   **Note**: MongoDB is NOT needed! Reservations are saved directly to Google Sheets.
 
 7. **Generate Domain**
    - In Railway dashboard, go to **Settings** tab
@@ -135,22 +135,6 @@ Your website has two parts:
 4. Railway will auto-detect Python/FastAPI
 5. Add environment variables (same as above)
 6. Deploy!
-
----
-
-## 🗄️ Database Note (MongoDB)
-
-Your current setup uses MongoDB, but for Google Sheets integration, you **don't need MongoDB** for reservations!
-
-**Option 1: Remove MongoDB dependency** (Recommended for simple use)
-- Reservations go directly to Google Sheets
-- No database needed
-
-**Option 2: Keep MongoDB** (if you want to store data locally too)
-- Add MongoDB service in Railway:
-  - Railway Dashboard → Add Service → Database → MongoDB
-  - Railway will auto-create `MONGO_URL`
-  - Update `MONGO_URL` in environment variables
 
 ---
 
