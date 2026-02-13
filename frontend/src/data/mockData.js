@@ -1,17 +1,17 @@
 // Mock data for Angara Restaurant
 
 export const restaurantInfo = {
-  name: "Angara",
+  name: "Anगाra",
   nameHindi: "अंगारा",
   tagline: "Pure Vegetarian Excellence",
   rating: 4.7,
-  totalReviews: 143,
+  totalReviews: 200,
   priceRange: "₹200-400 per person",
-  phone: "+91 82855 55569",
-  address: "Tulip Chowk, Sector 68, near Rama Krishna Public School, Gurugram, Haryana – 122101",
+  phone: "+91 8708206506",
+  address: "Near Rama Krishna Public School, Tulip Chowk, Sector 68, Gurugram, Haryana – 122101",
   timings: "Open | Closes at 11:30 PM",
   instagram: "https://www.instagram.com/angaraofficials/",
-  mapUrl: "https://www.google.com/maps?q=Tulip+Chowk+Sector+68+Gurugram",
+  mapUrl: "https://maps.app.goo.gl/FcsmJVWSYyAt6KfTA",
 };
 
 export const services = [
